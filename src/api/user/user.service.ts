@@ -11,7 +11,7 @@ export class UserService {
     async create(user: CreateUserDto) {
         try {
             let sameEmail = await this.userRepository.findByEmail(user.email)
-            if (sameEmail) throw new ConflictException("User already exist")
+            if (sameEmail) throw new ConflictException("User already exist.")
             else {
                 await this.userRepository.createUser(user)
                 return {
@@ -22,7 +22,7 @@ export class UserService {
         }
         catch (err) {
             if (err instanceof ConflictException) throw err;
-            throw new BadRequestException("Somethig went wrong")
+            throw new BadRequestException("Somethig went wrong.")
         }
     }
 
@@ -44,12 +44,12 @@ export class UserService {
                     },
                 };
             } else {
-                throw new NotFoundException("User not found")
+                throw new NotFoundException("User not found.")
             }
         }
         catch (err) {
             if (err instanceof NotFoundException) throw err;
-            throw new BadRequestException("Somethig went wrong")
+            throw new BadRequestException("Somethig went wrong.")
         }
     }
 
@@ -57,7 +57,7 @@ export class UserService {
         try {
             let user = await this.userRepository.findOneBy({ id })
             console.log(user)
-            if (!user) throw new NotFoundException("User not Found")
+            if (!user) throw new NotFoundException("User not Found.")
 
             return {
                 status: HttpStatus.OK,
@@ -67,14 +67,14 @@ export class UserService {
         }
         catch (err) {
             if (err instanceof NotFoundException) throw err;
-            throw new BadRequestException("Somethig went wrong")
+            throw new BadRequestException("Somethig went wrong.")
         }
     }
 
     async deleteUserById(id: number) {
         try {
             let user = await this.userRepository.findOneBy({ id })
-            if (!user) throw new NotFoundException("User not Found")
+            if (!user) throw new NotFoundException("User not Found.")
             await this.userRepository.delete(id)
             return {
                 status: HttpStatus.OK,
@@ -83,7 +83,7 @@ export class UserService {
         }
         catch (err) {
             if (err instanceof NotFoundException) throw err;
-            throw new BadRequestException("Somethig went wrong")
+            throw new BadRequestException("Somethig went wrong.")
         }
     }
 
@@ -91,7 +91,7 @@ export class UserService {
         try {
             let user = await this.userRepository.findOneBy({ id })
 
-            if (!user) throw new NotFoundException("User not Found")
+            if (!user) throw new NotFoundException("User not Found.")
 
             if (body.email) {
                 let user = await this.userRepository.findOne({
@@ -117,7 +117,7 @@ export class UserService {
         }
         catch (err) {
             if (err instanceof NotFoundException) throw err;
-            throw new BadRequestException("Somethig went wrong")
+            throw new BadRequestException("Somethig went wrong.")
         }
 
     }
